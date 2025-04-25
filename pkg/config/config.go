@@ -3,7 +3,6 @@ package config
 import (
 	"context"
 	"fmt"
-
 	"github.com/asimihsan/planning_engine/internal/config"
 )
 

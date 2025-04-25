@@ -28,6 +28,16 @@ func NewProvider(id string, value any, description string) *Provider {
 	}
 }
 
+// NewProviderWithTimestamp creates a new mock provider with a specific timestamp.
+func NewProviderWithTimestamp(id string, value any, description string, timestamp time.Time) *Provider {
+	return &Provider{
+		FactID:      id,
+		Value:       value,
+		Timestamp:   timestamp,
+		Description: description,
+	}
+}
+
 // WithError configures the provider to return the specified error.
 func (p *Provider) WithError(err error) *Provider {
 	p.Err = err

@@ -3,3 +3,13 @@ amends "../AppConfig.pkl"
 host = "localhost"
 
 port = 5939
+
+factProviders.levelServerBaseURL = "http://localhost:8080"
+factProviders.cacheTTL = "5s"
+factProviders.maxStaleness = "30s" 
+factProviders.providerTimeout = "2s"
+
+policy.bundleURI = "file:///../../policy/rego/main.rego"
+policy.refreshInterval = "10s"
+
+prometheus.listenAddr = ":9999"

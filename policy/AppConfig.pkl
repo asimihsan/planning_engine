@@ -3,8 +3,40 @@ module myorg.myteam.AppConfig
 
 import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.10.0#/go.pkl"
 
+/* ---------- nested types ---------- */
+
+class Policy {
+  bundleURI:       String   = "file:///policy/rego/main.rego"
+  refreshInterval: Duration = "30s"
+}
+
+class FactProviders {
+  levelServerBaseURL: String   = "http://levelserver.internal:8080"
+  cacheTTL:           Duration = "15s"
+  maxStaleness:       Duration = "45s"
+  providerTimeout:    Duration = "5s"
+}
+
+class Audit {
+  logTarget:       "stdout" | "dynamodb" = "stdout"
+  dynamoTableName: String                = "DeploymentGateAuditLog"
+}
+
+class Prometheus {
+  listenAddr: String = ":9100"
+}
+
+/* ---------- module properties ---------- */
+
 /// The hostname of this application.
 host: String
 
 /// The port to listen on.
 port: UInt16
+
+/// Policy-specific settings
+policy: Policy          // defaults to `new Policy {}` :contentReference[oaicite:0]{index=0}
+
+factProviders: FactProviders
+audit: Audit
+prometheus: Prometheus
