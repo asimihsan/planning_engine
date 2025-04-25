@@ -10,6 +10,7 @@ import (
 	"github.com/davecgh/go-spew/spew"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
+	"github.com/asimihsan/planning_engine/internal/fact/config"
 	"github.com/asimihsan/planning_engine/internal/fact/mock_required"
 	"github.com/asimihsan/planning_engine/internal/metrics"
 	"github.com/asimihsan/planning_engine/pkg/config/loader"
@@ -36,7 +37,9 @@ func main() {
 
 	// Initialize and register fact providers
 	pendingDeltaProvider := &mock_required.PendingDeltaProvider{}
-	maxPendingProvider := &mock_required.MaxPendingProvider{}
+
+	// Use the new ConfigProvider for max_pending_allowed
+	maxPendingProvider := config.NewMaxPendingAllowedProvider(cfg)
 
 	// Register the providers with the registry
 	registry.Register(pendingDeltaProvider)

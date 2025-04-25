@@ -9,6 +9,7 @@ factProviders = new {
   cacheTTL = 5.s
   maxStaleness = 30.s
   providerTimeout = 2.s
+  maxPendingAllowed = 750
 }
 
 policy = new {

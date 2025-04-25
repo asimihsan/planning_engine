@@ -10,16 +10,15 @@ import (
 
 // Server provides a mock implementation of the LevelServer API for testing.
 type Server struct {
-	server            *httptest.Server
-	pendingDelta      map[string]int // key = deploymentID|stage
-	maxPendingAllowed map[string]int // key = deploymentID|stage
+	server       *httptest.Server
+	pendingDelta map[string]int // key = deploymentID|stage
+	// Note: max_pending_allowed is intentionally removed as it's not provided by the real LevelServer
 }
 
 // NewServer creates and starts a new mock LevelServer.
 func NewServer() *Server {
 	s := &Server{
-		pendingDelta:      make(map[string]int),
-		maxPendingAllowed: make(map[string]int),
+		pendingDelta: make(map[string]int),
 	}
 
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -45,12 +44,8 @@ func NewServer() *Server {
 				http.Error(w, "JSON encoding error", http.StatusInternalServerError)
 				return
 			}
-		case "max_pending_allowed":
-			if err := json.NewEncoder(w).Encode(map[string]int{"value": s.maxPendingAllowed[key]}); err != nil {
-				http.Error(w, "JSON encoding error", http.StatusInternalServerError)
-				return
-			}
 		default:
+			// The real LevelServer doesn't provide max_pending_allowed, so we return 404 for anything else
 			http.Error(w, "Metric not found", http.StatusNotFound)
 		}
 	})
@@ -75,17 +70,10 @@ func (s *Server) SetPendingDelta(deploymentID, stage string, value int) {
 	s.pendingDelta[key] = value
 }
 
-// SetMaxPendingAllowed sets the value for the max_pending_allowed metric.
-func (s *Server) SetMaxPendingAllowed(deploymentID, stage string, value int) {
-	key := fmt.Sprintf("%s|%s", deploymentID, stage)
-	s.maxPendingAllowed[key] = value
-}
-
 // WithDefaultValues sets sensible defaults for testing.
 func (s *Server) WithDefaultValues() *Server {
 	// Default deployment and stage
 	defaultKey := "test-deployment|test-stage"
 	s.pendingDelta[defaultKey] = 100
-	s.maxPendingAllowed[defaultKey] = 500
 	return s
 }

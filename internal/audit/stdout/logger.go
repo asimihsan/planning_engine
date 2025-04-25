@@ -13,6 +13,8 @@ import (
 // Logger implements gate.AuditLogger with output to stdout.
 type Logger struct{}
 
+var _ gate.AuditLogger = (*Logger)(nil)
+
 // New creates a new stdout logger.
 func New() *Logger {
 	return &Logger{}

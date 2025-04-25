@@ -7,14 +7,15 @@ import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.10.0#/go.pkl"
 
 class Policy {
   bundleURI:       String   = "file:///policy/rego/main.rego"
-  refreshInterval: Duration = "30s"
+  refreshInterval: Duration = 30.s
 }
 
 class FactProviders {
   levelServerBaseURL: String   = "http://levelserver.internal:8080"
-  cacheTTL:           Duration = "15s"
-  maxStaleness:       Duration = "45s"
-  providerTimeout:    Duration = "5s"
+  cacheTTL:           Duration = 15.s
+  maxStaleness:       Duration = 45.s
+  providerTimeout:    Duration = 5.s
+  maxPendingAllowed:  Int      = 500
 }
 
 class Audit {

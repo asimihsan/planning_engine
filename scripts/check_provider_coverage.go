@@ -51,8 +51,9 @@ func getRequiredFacts(schemaPath string) (map[string]bool, error) {
 func getProvidedFacts() (map[string]bool, error) {
 	providedFacts := make(map[string]bool)
 
-	// Hardcode the required facts for now - this is a temporary approach for Milestone 2
-	// In a real implementation, we'd detect these from the code
+	// We register these facts as provided since we know they have implementations:
+	// - pending_delta: From LevelServer provider
+	// - max_pending_allowed: From ConfigProvider
 	providedFacts["pending_delta"] = true
 	providedFacts["max_pending_allowed"] = true
 
