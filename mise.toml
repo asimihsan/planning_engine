@@ -1,0 +1,9 @@
+[tools]
+"go:github.com/apple/pkl-go/cmd/pkl-gen-go" = "v0.10.0"
+go = "prefix:1.24"
+just = "latest"
+opa = "latest"
+pkl = "latest"
+
+[settings]
+experimental = true

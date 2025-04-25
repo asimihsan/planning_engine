@@ -1,0 +1,10 @@
+@go.Package { name = "github.com/asimihsan/planning_engine/internal/config" }
+module myorg.myteam.AppConfig
+
+import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.10.0#/go.pkl"
+
+/// The hostname of this application.
+host: String
+
+/// The port to listen on.
+port: UInt16
