@@ -66,6 +66,7 @@ The AuditLogger persists all decisions and errors for traceability, supporting:
 ```mermaid
 graph TD
     subgraph Planning Engine
+        direction TB  // Optional: Enforce top-bottom within this subgraph if needed
         FR[FactRegistry] --> |collects| F[Facts]
         PP[PolicyProvider] --> |loads| PB[PolicyBundle]
         PE[PolicyEngine] --> |evaluates| D[Decision]
@@ -83,9 +84,14 @@ graph TD
     end
 
     subgraph Clients
-        CD[CI/CD] --> |requests decision| PlanningEngine
-        PlanningEngine --> |responds| CD
+        DW[Deployment Worker]
+        CICD[CI/CD]
     end
+
+    DW --> |requests decision| PlanningEngine
+    CICD --> |requests decision| PlanningEngine
+    PlanningEngine --> |responds| DW
+    PlanningEngine --> |responds| CICD
 ```
 
 The Planning Engine provides decisions to client systems (like CI/CD pipelines or deployment
