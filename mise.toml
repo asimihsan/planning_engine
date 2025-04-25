@@ -5,6 +5,7 @@ just = "latest"
 opa = "latest"
 pkl = "latest"
 golangci-lint = "latest"
+gofumpt = "latest"
 
 [settings]
 experimental = true

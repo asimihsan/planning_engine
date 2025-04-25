@@ -1,0 +1,8 @@
+{
+    "type": "object",
+    "properties": {
+        "pending_delta": { "type": "integer" },
+        "max_pending_allowed": { "type": "integer" }
+    },
+    "required": ["pending_delta", "max_pending_allowed"]
+}
