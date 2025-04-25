@@ -83,16 +83,19 @@ graph TD
     end
 
     subgraph Clients
-        CD[CI/CD] --> |requests decision| Planning Engine
-        Planning Engine --> |responds| CD
+        CD[CI/CD] --> |requests decision| PlanningEngine
+        PlanningEngine --> |responds| CD
     end
 ```
+
+The Planning Engine provides decisions to client systems (like CI/CD pipelines or deployment
+workers) which then execute the actual deployment actions.
 
 ## Getting Started
 
 ### Prerequisites
 
-- Go 1.20 or higher
+- Go 1.24 or higher
 - [OPA](https://www.openpolicyagent.org/) for policy evaluation
 
 ### Installation
