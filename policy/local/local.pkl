@@ -4,12 +4,18 @@ host = "localhost"
 
 port = 5939
 
-factProviders.levelServerBaseURL = "http://localhost:8080"
-factProviders.cacheTTL = "5s"
-factProviders.maxStaleness = "30s" 
-factProviders.providerTimeout = "2s"
+factProviders = new {
+  levelServerBaseURL = "http://localhost:8080"
+  cacheTTL = 5.s
+  maxStaleness = 30.s
+  providerTimeout = 2.s
+}
 
-policy.bundleURI = "file:///../../policy/rego/main.rego"
-policy.refreshInterval = "10s"
+policy = new {
+  bundleURI = "file:///../../policy/rego/main.rego"
+  refreshInterval = 10.s
+}
 
-prometheus.listenAddr = ":9999"
+prometheus = new {
+  listenAddr = ":9999"
+}

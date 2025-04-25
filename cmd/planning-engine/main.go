@@ -10,8 +10,9 @@ import (
 	"github.com/davecgh/go-spew/spew"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	"github.com/asimihsan/planning_engine/internal/config"
+	"github.com/asimihsan/planning_engine/internal/fact/mock_required"
 	"github.com/asimihsan/planning_engine/internal/metrics"
+	"github.com/asimihsan/planning_engine/pkg/config/loader"
 	"github.com/asimihsan/planning_engine/pkg/gate"
 )
 
@@ -23,17 +24,23 @@ func main() {
 	metrics.MustRegister()
 
 	// Load configuration with enhanced loader
-	cfg, err := config.LoadFromPath(ctx, "policy/local/local.pkl")
+	cfg, sha, err := loader.LoadFromPathWithSHA(ctx, "policy/local/local.pkl")
 	if err != nil {
 		log.Fatalf("Failed to load configuration: %v", err)
 	}
+
+	fmt.Printf("Config SHA: %s\n", sha)
 
 	// Initialize registry with configuration
 	registry := gate.NewFactRegistry()
 
 	// Initialize and register fact providers
-	// This would normally include real providers like LevelServer
-	// For now, we'll use a placeholder log message
+	pendingDeltaProvider := &mock_required.PendingDeltaProvider{}
+	maxPendingProvider := &mock_required.MaxPendingProvider{}
+
+	// Register the providers with the registry
+	registry.Register(pendingDeltaProvider)
+	registry.Register(maxPendingProvider)
 
 	// Print configuration details
 	fmt.Printf("Configuration loaded successfully:\n%s\n", spew.Sdump(cfg))

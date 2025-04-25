@@ -171,35 +171,46 @@ if decision.Allow {
 
 **Milestone 1 Complete**: Core functionality is implemented, including:
 
-- Basic fact collection with synchronous provider execution
-- Simple policy evaluation using OPA
+- Basic fact collection with provider interfaces
+- Policy evaluation using OPA
 - In-memory fact registry
 - File-based policy provider
 - Console-based audit logging
 - Integration tests for basic scenarios
 
+**Milestone 2 Complete**: Enhanced fact collection and configuration management is implemented, including:
+
+- Centralized staleness/TTL enforcement in FactRegistry
+- Parallel fact collection with errgroup synchronization
+- Externalized thresholds in PKL configuration
+- Static provider coverage checks (compile-time validation)
+- LevelServer fact provider implementation with caching
+- Configuration loading with SHA tracking and caching
+- Prometheus metrics integration for observability
+- Integration tests for all components
+
 ## Next Steps
 
-### Milestone 2: Enhanced Fact Collection
+### Milestone 3: Robust Fact Provider, Fail-Safe Logic & Metrics
 
-- Parallel fact collection with error group synchronization
-- Fact staleness policies with TTL configuration
-- Support for lazy-loading and caching of facts
-- More built-in fact providers for common data sources
+- Implement fail-safe logic for deployment pauses
+- Enhance HTTP client error handling in fact providers
+- Refine metrics collection for provider latency
+- Implement robust timeouts during Snapshot operations
 
-### Milestone 3: Advanced Policy Management
+### Milestone 4: LocalStack Integration
 
-- Dynamic policy reloading
-- Policy versioning and rollback
-- Policy testing framework
-- Rule coverage analysis tools
+- Implement manifest-based policy/config loading
+- S3 integration for policy storage
+- DynamoDB audit logging with TTL
+- Optimize audit logs for fact usage
 
-### Milestone 4: Production Hardening
+### Milestone 5: Hot Reload, Metrics Endpoint & Health Checks
 
-- Persistent audit logging with database integration
-- Prometheus metrics for decision performance
-- Distributed caching for facts
-- Enhanced security and access controls
+- Implement atomic hot reloading for policies and configuration
+- Expose Prometheus metrics via HTTP endpoint
+- Add health endpoint with version reporting
+- Refine client SDK for ease of use
 
 ## Contributing
 

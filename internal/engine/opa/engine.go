@@ -13,6 +13,7 @@ import (
 type OpaPolicyBundle struct {
 	BundleID      string
 	PreparedQuery rego.PreparedEvalQuery
+	BundleData    []byte
 }
 
 var _ gate.PolicyBundle = (*OpaPolicyBundle)(nil)
@@ -20,6 +21,11 @@ var _ gate.PolicyBundle = (*OpaPolicyBundle)(nil)
 // ID implements gate.PolicyBundle
 func (b *OpaPolicyBundle) ID() string {
 	return b.BundleID
+}
+
+// Data implements gate.PolicyBundle
+func (b *OpaPolicyBundle) Data() []byte {
+	return b.BundleData
 }
 
 // Engine implements gate.PolicyEngine using OPA

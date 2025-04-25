@@ -35,7 +35,7 @@ host: String
 port: UInt16
 
 /// Policy-specific settings
-policy: Policy          // defaults to `new Policy {}` :contentReference[oaicite:0]{index=0}
+policy: Policy
 
 factProviders: FactProviders
 audit: Audit

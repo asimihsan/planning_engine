@@ -4,7 +4,8 @@ import "context"
 
 // PolicyBundle holds the compiled policy and metadata.
 type PolicyBundle interface {
-	ID() string // e.g., SHA or version of the bundle content
+	ID() string   // e.g., SHA or version of the bundle content
+	Data() []byte // The policy data
 }
 
 // PolicyProvider retrieves PolicyBundles.

@@ -7,6 +7,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/open-policy-agent/opa v1.3.0
 	github.com/prometheus/client_golang v1.21.1
+	github.com/stretchr/testify v1.10.0
 	golang.org/x/sync v0.12.0
 )
 
@@ -22,6 +23,7 @@ require (
 	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/klauspost/compress v1.18.0 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/prometheus/client_model v0.6.1 // indirect
 	github.com/prometheus/common v0.62.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect

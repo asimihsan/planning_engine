@@ -11,7 +11,8 @@ import (
 // Use a struct that doesn't implement gate.PolicyBundle correctly
 type InvalidBundle struct{}
 
-func (b InvalidBundle) ID() string { return "invalid" }
+func (b InvalidBundle) ID() string   { return "invalid" }
+func (b InvalidBundle) Data() []byte { return []byte("invalid data") }
 
 // Helper to create a test policy bundle
 func createTestBundle(t *testing.T, policy string, query string) *OpaPolicyBundle {
@@ -40,6 +41,7 @@ func createTestBundle(t *testing.T, policy string, query string) *OpaPolicyBundl
 	return &OpaPolicyBundle{
 		BundleID:      "test-bundle",
 		PreparedQuery: pq,
+		BundleData:    []byte(policy),
 	}
 }
 
