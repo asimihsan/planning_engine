@@ -4,6 +4,7 @@ go = "prefix:1.24"
 just = "latest"
 opa = "latest"
 pkl = "latest"
+golangci-lint = "latest"
 
 [settings]
 experimental = true

@@ -8,3 +8,9 @@ generate:
 
 run:
     mise x -- go run ./cmd/planning-engine/main.go
+
+lint:
+    mise x -- golangci-lint run ./...
+
+test:
+    mise x -- go test -race ./...

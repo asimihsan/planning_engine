@@ -1,0 +1,56 @@
+run:
+  timeout: 5m # fail fast in CI
+  tests: true # lint *_test.go too
+  skip-dirs:
+    - vendor
+    - third_party
+  skip-files: # ignore generated code
+    - ".*\\.pb\\.go"
+    - ".*internal/generated/\\.go"
+
+linters:
+  enable:
+    - deadcode # unreachable code
+    - dupimport # duplicate imports
+    - errcheck # unchecked errors
+    - gocyclo # excessive complexity
+    - gosec # basic vuln patterns
+    - govet # compiler-level checks
+    - ineffassign # ineffectual assigns
+    - lll # long-line detector (we’ll tune below)
+    - revive # style; drop the obsolete golint
+    - staticcheck # includes gosimple, typecheck, unused, etc.
+    - structcheck # unused struct fields
+    - unused # dead identifiers not caught by build tags
+    - varcheck # unused global variables
+
+  disable:
+    - funlen # often too chatty; re-enable if you care
+    - godot # full stops in comments—style choice
+    - gomnd # magic numbers—use sparingly
+
+linters-settings:
+  lll:
+    line-length: 120
+    tab-width: 1
+    # allow long log/error strings but still flag code:
+    allow-long-lines-regex: "^\\s*(//|err|log\\.)"
+
+  gocyclo:
+    min-complexity: 15 # default 30 is too high for most codebases
+
+  revive:
+    severity: warning
+    ignore-generated-header: true
+    rules:
+      - name: unused-parameter # override default “allow” so tests can skip args
+        arguments: [false]
+
+issues:
+  exclude-use-default: false
+  max-issues-per-linter: 0 # unlimited, rely on severity filter
+  max-same-issues: 0
+  severity:
+    gosec: error # fail the build on known security findings
+    staticcheck: error
+    revive: warning
