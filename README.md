@@ -106,13 +106,19 @@ workers) which then execute the actual deployment actions.
 
 ### Installation
 
+Install mise: https://mise.jdx.dev/installing-mise.html
+
 ```bash
 # Clone the repository
 git clone https://github.com/asimihsan/planning_engine.git
 cd planning_engine
 
 # Install dependencies
-go mod download
+mise trust
+mise install
+
+# Generate some code
+just generate
 ```
 
 ### Running Tests

@@ -3,6 +3,14 @@ setup:
     mise install
 
 clean:
+    #!/usr/bin/env bash
+
+    set -euo pipefail
+
+    if [ ! -d "internal/config" ]; then
+        mkdir -p internal/config
+    fi
+
     rm -f internal/config/*
     touch internal/config/.gitkeep
 
